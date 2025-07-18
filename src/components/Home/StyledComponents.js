@@ -73,9 +73,10 @@ export const HomeProductsFilterContainer = Styled.div`
 
 export const HomeContent = Styled.div`
   flex-grow: 1;
-  padding-left: 20px;
   height: 90vh;
   overflow: auto;
+  padding-left: 20px;
+  padding-top: 20px;
   padding-right: 10%;
 
   @media (max-width: 767px) {
@@ -84,12 +85,20 @@ export const HomeContent = Styled.div`
   
   @media (max-width: 300px) {
     padding-right: 4px; 
+    padding-top: 10px;
   }
 `
 
-export const ContentHeading = Styled.h2`
+export const SearchInputBar = Styled.input`
   color: ${props => (props.darkTheme ? '#ffffff' : '#000000')};
-  font-weight: bold;
+  border: 1px solid ${props => (props.darkTheme ? '#ffffff' : '#000000')};
+  background-color: transparent;
+  height: 35px;
+  border-radius: 5px;
+  min-width: 200px;
+  width: 40%;
+  padding-left: 5px;
+  outline: none;
 `
 
 export const FailureHeading = Styled.h2`

@@ -18,7 +18,7 @@ import {
   FilterPopupCloseButton,
   HomeProductsFilterContainer,
   HomeContent,
-  ContentHeading,
+  SearchInputBar,
   FailureHeading,
   FailureDescription,
 } from './StyledComponents'
@@ -32,6 +32,7 @@ const Home = () => {
   )
   const [selectedCategories, setSelectedCategories] = useState([])
   const [sortBy, setSortBy] = useState('')
+  const [userSearch, setUserSearch] = useState('')
 
   const getProductsData = useCallback(async () => {
     setFetchStatus(fetchingStatusConstants.inProgress)
@@ -72,12 +73,22 @@ const Home = () => {
     setSortBy('')
   }
 
+  const onChangeUserSearch = event => {
+    setUserSearch(event.target.value)
+  }
+
   const processedProducts = useMemo(() => {
     let updatedProducts = [...productsList]
 
     if (selectedCategories.length > 0) {
       updatedProducts = updatedProducts.filter(eachItem =>
         selectedCategories.includes(eachItem.category),
+      )
+    }
+
+    if (userSearch.length > 0) {
+      updatedProducts = updatedProducts.filter(eachItem =>
+        eachItem.title.toLowerCase().includes(userSearch.toLowerCase()),
       )
     }
 
@@ -94,9 +105,8 @@ const Home = () => {
       default:
         break
     }
-
     return updatedProducts
-  }, [productsList, selectedCategories, sortBy])
+  }, [productsList, selectedCategories, sortBy, userSearch])
 
   const filtersComponent = () => (
     <ProductsFilter
@@ -111,11 +121,11 @@ const Home = () => {
   const renderFetchedData = () => {
     if (processedProducts.length === 0) {
       return (
-        <div className="failure-container">
+        <div className='failure-container'>
           <img
-            src="https://res.cloudinary.com/dmlk7cxkm/image/upload/Screenshot_2025-07-13_200451_akfe4m.png"
-            alt="No products"
-            className="failure-img"
+            src='https://res.cloudinary.com/dmlk7cxkm/image/upload/Screenshot_2025-07-13_200451_akfe4m.png'
+            alt='No products'
+            className='failure-img'
           />
           <FailureHeading darkTheme={darkTheme}>
             No Products Found
@@ -127,7 +137,7 @@ const Home = () => {
       )
     }
     return (
-      <ul className="products-list">
+      <ul className='products-list'>
         {processedProducts.map(eachItem => (
           <ProductItem key={eachItem.id} eachProduct={eachItem} />
         ))}
@@ -149,28 +159,39 @@ const Home = () => {
   }
 
   return (
-    <div className="window-container">
+    <div className='window-container'>
       <Header />
       <HomeContentContainer darkTheme={darkTheme}>
-        <Popup trigger={<HomeFilterButtonSM>Filters</HomeFilterButtonSM>} modal>
-          {close => (
-            <FilterPopupContainer darkTheme={darkTheme}>
-              <FilterPopupCloseButton
-                type="button"
-                onClick={close}
-                darkTheme={darkTheme}
-              >
-                <MdCloseFullscreen />
-              </FilterPopupCloseButton>
-              {filtersComponent()}
-            </FilterPopupContainer>
-          )}
-        </Popup>
         <HomeProductsFilterContainer darkTheme={darkTheme}>
           {filtersComponent()}
         </HomeProductsFilterContainer>
         <HomeContent darkTheme={darkTheme}>
-          <ContentHeading darkTheme={darkTheme}>Products</ContentHeading>
+          <div className='search-filters-container'>
+            <SearchInputBar
+              type='search'
+              placeholder='Search for Product'
+              value={userSearch}
+              onChange={onChangeUserSearch}
+              darkTheme={darkTheme}
+            />
+            <Popup
+              trigger={<HomeFilterButtonSM>Filters</HomeFilterButtonSM>}
+              modal
+            >
+              {close => (
+                <FilterPopupContainer darkTheme={darkTheme}>
+                  <FilterPopupCloseButton
+                    type='button'
+                    onClick={close}
+                    darkTheme={darkTheme}
+                  >
+                    <MdCloseFullscreen />
+                  </FilterPopupCloseButton>
+                  {filtersComponent()}
+                </FilterPopupContainer>
+              )}
+            </Popup>
+          </div>
           {renderResponsiveView()}
         </HomeContent>
       </HomeContentContainer>

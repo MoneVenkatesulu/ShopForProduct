@@ -8,6 +8,11 @@
   height: 70px;
 }
 
+.search-filters-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .products-list {
   list-style-type: none;
   padding: 0px;
