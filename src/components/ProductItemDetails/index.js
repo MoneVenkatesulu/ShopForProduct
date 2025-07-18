@@ -60,8 +60,15 @@ const ProductItemDetails = props => {
   }
 
   const renderFetchedData = () => {
-    const {id, title, price, description, category, image, rating} =
-      productDetials
+    const {
+      id,
+      title,
+      price,
+      description,
+      category,
+      image,
+      rating,
+    } = productDetials
     const {rate, count} = rating
 
     const onClicItemsAddtoCart = () => {

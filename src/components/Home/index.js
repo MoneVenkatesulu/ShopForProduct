@@ -121,11 +121,11 @@ const Home = () => {
   const renderFetchedData = () => {
     if (processedProducts.length === 0) {
       return (
-        <div className='failure-container'>
+        <div className="failure-container">
           <img
-            src='https://res.cloudinary.com/dmlk7cxkm/image/upload/Screenshot_2025-07-13_200451_akfe4m.png'
-            alt='No products'
-            className='failure-img'
+            src="https://res.cloudinary.com/dmlk7cxkm/image/upload/Screenshot_2025-07-13_200451_akfe4m.png"
+            alt="No products"
+            className="failure-img"
           />
           <FailureHeading darkTheme={darkTheme}>
             No Products Found
@@ -137,7 +137,7 @@ const Home = () => {
       )
     }
     return (
-      <ul className='products-list'>
+      <ul className="products-list">
         {processedProducts.map(eachItem => (
           <ProductItem key={eachItem.id} eachProduct={eachItem} />
         ))}
@@ -159,17 +159,17 @@ const Home = () => {
   }
 
   return (
-    <div className='window-container'>
+    <div className="window-container">
       <Header />
       <HomeContentContainer darkTheme={darkTheme}>
         <HomeProductsFilterContainer darkTheme={darkTheme}>
           {filtersComponent()}
         </HomeProductsFilterContainer>
         <HomeContent darkTheme={darkTheme}>
-          <div className='search-filters-container'>
+          <div className="search-filters-container">
             <SearchInputBar
-              type='search'
-              placeholder='Search for Product'
+              type="search"
+              placeholder="Search for Product"
               value={userSearch}
               onChange={onChangeUserSearch}
               darkTheme={darkTheme}
@@ -181,7 +181,7 @@ const Home = () => {
               {close => (
                 <FilterPopupContainer darkTheme={darkTheme}>
                   <FilterPopupCloseButton
-                    type='button'
+                    type="button"
                     onClick={close}
                     darkTheme={darkTheme}
                   >
