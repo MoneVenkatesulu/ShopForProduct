@@ -31,6 +31,7 @@
 
 .empty-cart-img {
   width: 300px;
+  border-radius: 10px;
 }
 
 .orders-placing-container {
@@ -77,6 +78,7 @@
 .orders-placing-popup-heading {
   color: #fff;
   font-size: 45px;
+  font-family: 'Bree Serif';
 }
 
 .pop-close-container {
@@ -84,9 +86,9 @@
   gap: 20px;
 }
 
-.pop-close-buttons {
+.pop-inner-buttons {
   border: none;
-  background-color: #fff;
+  background-color: rgb(200, 199, 199);
   border-radius: 5px;
   font-weight: bold;
   line-height: 2;

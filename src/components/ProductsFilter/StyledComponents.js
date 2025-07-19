@@ -2,6 +2,7 @@ import Styled from 'styled-components'
 
 export const FiltersHeading = Styled.h4`
   color: ${props => (props.darkTheme ? '#ffffff' : '#000000')};
+  font-family: 'Roboto';
   display: flex;
   align-items: center;
   gap: 5px;

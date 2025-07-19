@@ -24,10 +24,10 @@ const Cart = () => {
     updateCartList()
   }
 
-  let totalAmount = 0
-  cartList.forEach(eachItem => {
-    totalAmount += eachItem.itemCount * eachItem.price
-  })
+  const totalAmount = cartList.reduce(
+    (amount, item) => amount + item.price * item.itemCount,
+    0,
+  )
 
   const emptyCartView = () => (
     <div className="empty-cart-container">
@@ -36,12 +36,15 @@ const Cart = () => {
         alt="empty cart"
         className="empty-cart-img"
       />
-      <NoProductsHeading darkTheme={darkTheme}>
-        No Products Added
-      </NoProductsHeading>
+      <NoProductsHeading darkTheme={darkTheme}>Empty Cart</NoProductsHeading>
       <NoProductsDescription darkTheme={darkTheme}>
-        No Products added yet! Please add produts.
+        No products added yet! Please add products.
       </NoProductsDescription>
+      <Link to="/">
+        <button type="button" className="pop-inner-buttons">
+          Move to Home Page
+        </button>
+      </Link>
     </div>
   )
 
@@ -64,51 +67,55 @@ const Cart = () => {
                 <CartItem key={eachItem.id} eachProduct={eachItem} />
               ))}
         </ul>
-        <div className="orders-placing-container">
-          <div>
-            <TotalAmountHeading darkTheme={darkTheme}>
-              Total Amount
-            </TotalAmountHeading>
-            <TotalAmountDescription darkTheme={darkTheme}>
-              {parseFloat(totalAmount.toFixed(2))} /-
-            </TotalAmountDescription>
-          </div>
-          <Popup
-            trigger={
-              <button type="button" className="popup-orders-placing-button">
-                Place Order
-              </button>
-            }
-            modal
-          >
-            {close => (
-              <div className="orders-placing-popup">
-                <div className="orders-placing-popup-inner-container">
-                  <img
-                    src="https://res.cloudinary.com/dmlk7cxkm/image/upload/Screenshot_2025-07-18_080049_umfakm.png"
-                    alt="order-placed"
-                    className="order-placed-img"
-                  />
-                  <h2 className="orders-placing-popup-heading">Order Placed</h2>
-                  <div className="pop-close-container">
-                    <Link to="/">
-                      <button type="button" className="pop-close-buttons">
-                        Move to Home Page
+        {cartList.length > 0 && (
+          <div className="orders-placing-container">
+            <div>
+              <TotalAmountHeading darkTheme={darkTheme}>
+                Total Amount
+              </TotalAmountHeading>
+              <TotalAmountDescription darkTheme={darkTheme}>
+                {parseFloat(totalAmount.toFixed(2))} /-
+              </TotalAmountDescription>
+            </div>
+            <Popup
+              trigger={
+                <button type="button" className="popup-orders-placing-button">
+                  Place Order
+                </button>
+              }
+              modal
+            >
+              {close => (
+                <div className="orders-placing-popup">
+                  <div className="orders-placing-popup-inner-container">
+                    <img
+                      src="https://res.cloudinary.com/dmlk7cxkm/image/upload/Screenshot_2025-07-18_080049_umfakm.png"
+                      alt="order-placed"
+                      className="order-placed-img"
+                    />
+                    <h2 className="orders-placing-popup-heading">
+                      Order Placed
+                    </h2>
+                    <div className="pop-close-container">
+                      <Link to="/">
+                        <button type="button" className="pop-inner-buttons">
+                          Move to Home Page
+                        </button>
+                      </Link>
+                      <button
+                        type="button"
+                        onClick={close}
+                        className="pop-inner-buttons"
+                      >
+                        Close
                       </button>
-                    </Link>
-                    <button
-                      type="button"
-                      onClick={close}
-                      className="pop-close-buttons"
-                    >
-                      Close
-                    </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
-          </Popup>
-        </div>
+              )}
+            </Popup>
+          </div>
+        )}
       </CartContent>
     </div>
   )

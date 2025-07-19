@@ -124,7 +124,7 @@ const Home = () => {
         <div className="failure-container">
           <img
             src="https://res.cloudinary.com/dmlk7cxkm/image/upload/Screenshot_2025-07-13_200451_akfe4m.png"
-            alt="No products"
+            alt="no products"
             className="failure-img"
           />
           <FailureHeading darkTheme={darkTheme}>

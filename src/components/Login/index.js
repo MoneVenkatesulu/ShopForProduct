@@ -39,7 +39,7 @@ const Login = props => {
     <div className="login-container">
       <img
         src="https://res.cloudinary.com/dmlk7cxkm/image/upload/Screenshot_2025-07-12_144456_dqemuw.png"
-        alt="login-img"
+        alt="login"
         className="login-form-img"
       />
       <form className="form-container" onSubmit={onSubmitForm}>
